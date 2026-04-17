@@ -85,6 +85,23 @@ st.markdown(
     /* Plotly chart backgrounds */
     .js-plotly-plot { border-radius: 12px; }
 
+    /* Ensure all markdown headings are visible on dark background */
+    h1, h2, h3, h4, h5, h6,
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3,
+    .stMarkdown h4, .stMarkdown h5, .stMarkdown h6,
+    [data-testid="stMarkdownContainer"] h1,
+    [data-testid="stMarkdownContainer"] h2,
+    [data-testid="stMarkdownContainer"] h3,
+    [data-testid="stMarkdownContainer"] h4 {
+        color: #e2e8ff !important;
+    }
+
+    /* Caption and info text */
+    .stCaption, [data-testid="stCaptionContainer"] p { color: #94a3b8 !important; }
+
+    /* General text color */
+    p, li, span, label { color: #d0d8ff; }
+
     /* Team card */
     .team-card {
         background: linear-gradient(135deg, rgba(167,139,250,0.15), rgba(56,189,248,0.1));
