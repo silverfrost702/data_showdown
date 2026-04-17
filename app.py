@@ -163,8 +163,9 @@ def run_clustering(df, k=5):
 
 
 @st.cache_data
-def build_team(df, max_total=4200, max_same_type=2, team_size=6):
+def build_team(df, max_total=2700, max_same_type=2, team_size=6):
     stat_cols = ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"]
+    min_stat = df["Total"].min()
     cands = df.sort_values("Total", ascending=False).copy()
     team, type_count, running = [], {}, 0
     for _, row in cands.iterrows():
@@ -172,8 +173,12 @@ def build_team(df, max_total=4200, max_same_type=2, team_size=6):
             break
         t1 = row["Type1"]
         t2 = row["Type2"] if pd.notna(row.get("Type2")) else None
-        if running + row["Total"] > max_total:
+        
+        # Reserve minimum budget required for remaining slots
+        slots_left = team_size - len(team)
+        if running + row["Total"] + (slots_left - 1) * min_stat > max_total:
             continue
+            
         if type_count.get(t1, 0) >= max_same_type:
             continue
         if t2 and type_count.get(t2, 0) >= max_same_type:
@@ -224,7 +229,7 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown("## Team Builder")
-    tb_max_total = st.slider("Max Combined Total", 1800, 5000, 4200, step=50)
+    tb_max_total = st.slider("Max Combined Total", 1800, 3000, 2700, step=50)
     tb_max_type = st.slider("Max Same-Type", 1, 3, 2)
 
 # ── Filter base dataframe ─────────────────────────────────────────────────────
