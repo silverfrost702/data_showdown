@@ -1,4 +1,4 @@
-# Pokémon Data Showdown 🎮📊
+# Pokémon Data Showdown
 
 ![Pokémon Showdown](plots/pokemon_main_img.webp)
 
