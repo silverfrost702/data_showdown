@@ -163,7 +163,7 @@ def run_clustering(df, k=5):
 
 
 @st.cache_data
-def build_team(df, max_total=2700, max_same_type=2, team_size=6):
+def build_team(df, max_total=4200, max_same_type=2, team_size=6):
     stat_cols = ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"]
     cands = df.sort_values("Total", ascending=False).copy()
     team, type_count, running = [], {}, 0
@@ -224,7 +224,7 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown("## Team Builder")
-    tb_max_total = st.slider("Max Combined Total", 1800, 3000, 2700, step=50)
+    tb_max_total = st.slider("Max Combined Total", 1800, 5000, 4200, step=50)
     tb_max_type = st.slider("Max Same-Type", 1, 3, 2)
 
 # ── Filter base dataframe ─────────────────────────────────────────────────────
